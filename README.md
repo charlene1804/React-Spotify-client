@@ -8,3 +8,8 @@ Spotify API consuming client
 
 Get the spotify token from :
 https://developer.spotify.com/console/get-search-item/
+
+## Deployed with Vercel
+
+You can see/ use the deploy product at this address:
+https://react-spotify-client-kappa.vercel.app/
