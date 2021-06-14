@@ -1,6 +1,6 @@
-# Client Spotify
+A simple Spotify API consuming client
 
-Spotify API consuming client
+# Client Spotify
 
 ![image](docs/resultat.png)
 
