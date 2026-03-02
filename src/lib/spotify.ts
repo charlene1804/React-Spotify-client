@@ -12,7 +12,7 @@ export async function fetchTracks(
   accessToken: string,
   query: string
 ): Promise<SpotifyTrack[]> {
-  const url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&market=FR&limit=20&offset=0`;
+  const url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&market=FR&limit=10&offset=0`;
   const response = await fetch(url, {
     headers: {
       Accept: "application/json",

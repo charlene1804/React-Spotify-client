@@ -19,7 +19,7 @@ describe("fetchTracks", () => {
 
     expect(mockFetch).toHaveBeenCalledTimes(1);
     expect(mockFetch).toHaveBeenCalledWith(
-      "https://api.spotify.com/v1/search?q=hello&type=track&market=FR&limit=20&offset=0",
+      "https://api.spotify.com/v1/search?q=hello&type=track&market=FR&limit=10&offset=0",
       {
         headers: {
           Accept: "application/json",
