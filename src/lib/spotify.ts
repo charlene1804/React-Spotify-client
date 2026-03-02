@@ -6,6 +6,7 @@ export type SpotifyTrack = {
     images: Array<{ url: string; width: number; height: number }>;
   };
   preview_url: string | null;
+  external_urls?: { spotify?: string };
 };
 
 export async function fetchTracks(

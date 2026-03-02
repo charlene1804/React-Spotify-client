@@ -73,11 +73,25 @@ export default function TrackResults({
           <p className="text-sm text-zinc-500 truncate">
             {track.artists[0]?.name ?? "—"}
           </p>
-          {track.preview_url && (
-            <div className="mt-2">
+          <div className="mt-2">
+            {track.preview_url ? (
               <AudioPlayer url={track.preview_url} />
-            </div>
-          )}
+            ) : (
+              <span className="inline-flex items-center gap-2 text-xs text-zinc-400">
+                <span>No preview</span>
+                {track.external_urls?.spotify && (
+                  <a
+                    href={track.external_urls.spotify}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-zinc-600 underline hover:text-zinc-900"
+                  >
+                    Open in Spotify
+                  </a>
+                )}
+              </span>
+            )}
+          </div>
         </li>
       ))}
     </ul>
