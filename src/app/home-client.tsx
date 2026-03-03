@@ -29,7 +29,7 @@ export default function HomeClient() {
           setSearchTerm={setSearchTerm}
           isLoading={isLoading}
         />
-        <p className="text-xs text-zinc-600 sm:text-sm dark:text-zinc-400">
+        <p className="text-xs text-zinc-600 transition-colors duration-300 ease-in-out sm:text-sm dark:text-zinc-400">
           When Spotify does not provide a preview, the play button uses a sample
           clip so you can still try the audio player.
         </p>

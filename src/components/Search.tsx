@@ -24,7 +24,7 @@ export default function Search({
       </div>
       {!hasToken && (
         <div
-          className="flex gap-3 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900 sm:p-4 dark:border-amber-500/40 dark:bg-amber-950/50 dark:text-amber-200"
+          className="flex gap-3 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900 transition-colors duration-300 ease-in-out sm:p-4 dark:border-amber-500/40 dark:bg-amber-950/50 dark:text-amber-200"
           role="status"
         >
           <span aria-hidden className="shrink-0 text-amber-600 dark:text-amber-400">
@@ -44,7 +44,7 @@ export default function Search({
           onSubmit={(e) => e.preventDefault()}
           className="flex flex-col gap-2"
         >
-          <label htmlFor="search" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">
+          <label htmlFor="search" className="block text-sm font-medium text-zinc-700 transition-colors duration-300 ease-in-out dark:text-zinc-300">
             Search for a track
           </label>
           <input
@@ -53,7 +53,7 @@ export default function Search({
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search for a track"
-            className="w-full min-h-[44px] rounded-lg border border-zinc-300 bg-white px-3 py-3 text-base text-zinc-900 placeholder:text-zinc-500 focus:border-[#1DB954] focus:outline-none focus:ring-1 focus:ring-[#1DB954] dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 sm:py-2 sm:text-sm"
+            className="w-full min-h-[44px] rounded-lg border border-zinc-300 bg-white px-3 py-3 text-base text-zinc-900 placeholder:text-zinc-500 transition-colors duration-300 ease-in-out focus:border-[#1DB954] focus:outline-none focus:ring-1 focus:ring-[#1DB954] dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 sm:py-2 sm:text-sm"
             aria-busy={isLoading}
           />
           {isLoading && (

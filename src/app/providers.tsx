@@ -84,7 +84,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeContext.Provider value={themeValue}>
-        <div className={wrapperClass}>
+        <div className={`transition-colors duration-300 ease-in-out ${wrapperClass}`}>
           <AppContext.Provider value={appValue}>{children}</AppContext.Provider>
         </div>
       </ThemeContext.Provider>

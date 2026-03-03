@@ -21,9 +21,11 @@ export default function TrackResults({
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
+  const transitionClass = "transition-colors duration-300 ease-in-out";
+
   if (isLoading) {
     return (
-      <p className={`text-sm ${isDark ? "text-zinc-400" : "text-zinc-500"}`} aria-live="polite">
+      <p className={`text-sm ${transitionClass} ${isDark ? "text-zinc-400" : "text-zinc-500"}`} aria-live="polite">
         Loading…
       </p>
     );
@@ -31,7 +33,7 @@ export default function TrackResults({
 
   if (isError) {
     return (
-      <p className={`text-sm ${isDark ? "text-red-400" : "text-red-600"}`} role="alert">
+      <p className={`text-sm ${transitionClass} ${isDark ? "text-red-400" : "text-red-600"}`} role="alert">
         {error instanceof Error ? error.message : "Search failed"}
       </p>
     );
@@ -39,19 +41,19 @@ export default function TrackResults({
 
   if (!tracks || tracks.length === 0) {
     return (
-      <p className={`text-sm ${isDark ? "text-zinc-400" : "text-zinc-500"}`} aria-live="polite">
+      <p className={`text-sm ${transitionClass} ${isDark ? "text-zinc-400" : "text-zinc-500"}`} aria-live="polite">
         No tracks found.
       </p>
     );
   }
 
   const cardClass = isDark
-    ? "rounded-xl border border-zinc-600 bg-zinc-800 p-3 shadow-none transition-[border-color,background-color] hover:border-zinc-500 hover:bg-zinc-700 sm:p-4"
-    : "rounded-xl border border-zinc-200 bg-white p-3 shadow-md transition-[border-color,background-color] hover:border-zinc-300 hover:bg-zinc-50 sm:p-4";
-  const imagePlaceholderClass = isDark ? "bg-zinc-700" : "bg-zinc-100";
-  const titleClass = isDark ? "text-zinc-100" : "text-zinc-900";
-  const artistClass = isDark ? "text-zinc-400" : "text-zinc-600";
-  const sampleClass = isDark ? "text-zinc-500" : "text-zinc-500";
+    ? "rounded-xl border border-zinc-600 bg-zinc-800 p-3 shadow-none transition-colors duration-300 ease-in-out hover:border-zinc-500 hover:bg-zinc-700 sm:p-4"
+    : "rounded-xl border border-zinc-200 bg-white p-3 shadow-md transition-colors duration-300 ease-in-out hover:border-zinc-300 hover:bg-zinc-50 sm:p-4";
+  const imagePlaceholderClass = isDark ? "bg-zinc-700 transition-colors duration-300 ease-in-out" : "bg-zinc-100 transition-colors duration-300 ease-in-out";
+  const titleClass = isDark ? "text-zinc-100 transition-colors duration-300 ease-in-out" : "text-zinc-900 transition-colors duration-300 ease-in-out";
+  const artistClass = isDark ? "text-zinc-400 transition-colors duration-300 ease-in-out" : "text-zinc-600 transition-colors duration-300 ease-in-out";
+  const sampleClass = isDark ? "text-zinc-500 transition-colors duration-300 ease-in-out" : "text-zinc-500 transition-colors duration-300 ease-in-out";
 
   return (
     <ul
