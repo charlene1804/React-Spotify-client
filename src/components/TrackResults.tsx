@@ -77,8 +77,9 @@ export default function TrackResults({
             {track.preview_url ? (
               <AudioPlayer url={track.preview_url} />
             ) : (
-              <span className="inline-flex items-center gap-2 text-xs text-zinc-400">
-                <span>No preview</span>
+              <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
+                <AudioPlayer url="/sample.m4a" />
+                <span className="text-zinc-500">(sample — preview unavailable)</span>
                 {track.external_urls?.spotify && (
                   <a
                     href={track.external_urls.spotify}

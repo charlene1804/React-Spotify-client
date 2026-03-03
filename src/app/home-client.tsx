@@ -26,6 +26,10 @@ export default function HomeClient() {
           setSearchTerm={setSearchTerm}
           isLoading={isLoading}
         />
+        <p className="text-sm text-zinc-500">
+          When Spotify does not provide a preview, the play button uses a sample
+          clip so you can still try the audio player.
+        </p>
         <TrackResults
           tracks={tracks}
           isLoading={isLoading}

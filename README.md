@@ -11,13 +11,13 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000). Paste your Spotify access token in the app to enable search.
 
-**Note on 30-second previews:** As of late 2024, Spotify restricts preview URLs for apps in development mode (and for apps registered after Nov 2024). You may see "No preview" for all tracks until the app has extended Web API access. The "Open in Spotify" link still lets users open any track in the Spotify app.
+**Note on 30-second previews:** As of late 2024, Spotify restricts preview URLs for apps in development mode (and for apps registered after Nov 2024). When no preview is available, the app plays a **sample audio clip** so you can still try the in-app player; you can also use "Open in Spotify" to play the full track in the Spotify app.
 
 ## Tests
 
 ```bash
-yarn test        # watch mode
-yarn test:run    # single run
+yarn test        # run all tests once
+yarn test:watch  # watch mode
 ```
 
 ## How to get a Spotify access token
