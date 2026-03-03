@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import type { SpotifyTrack } from "@/lib/spotify";
 import AudioPlayer from "../AudioPlayer";
@@ -18,6 +19,7 @@ export default function TrackResults({
   isError,
   error,
 }: TrackResultsProps) {
+  const [playingId, setPlayingId] = useState<string | null>(null);
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
@@ -110,10 +112,20 @@ export default function TrackResults({
           </p>
           <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1">
             {track.preview_url ? (
-              <AudioPlayer url={track.preview_url} />
+              <AudioPlayer
+                url={track.preview_url}
+                playerId={track.id}
+                playingId={playingId}
+                onStartPlaying={setPlayingId}
+              />
             ) : (
               <>
-                <AudioPlayer url="/sample.m4a" />
+                <AudioPlayer
+                  url="/sample.m4a"
+                  playerId={`${track.id}-sample`}
+                  playingId={playingId}
+                  onStartPlaying={setPlayingId}
+                />
                 <span className={`text-xs ${sampleClass}`}>
                   (sample — preview unavailable)
                 </span>

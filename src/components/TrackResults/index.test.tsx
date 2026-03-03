@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import TrackResults from "@/components/TrackResults";
 import { Providers } from "@/app/providers";
 import type { SpotifyTrack } from "@/lib/spotify";
@@ -163,5 +164,31 @@ describe("TrackResults", () => {
       error: null,
     });
     expect(within(container).getByText("—")).toBeInTheDocument();
+  });
+
+  it("pauses first player when second player is started", async () => {
+    const user = userEvent.setup();
+    const tracks = [
+      makeTrack({ id: "tid-1", name: "First" }),
+      makeTrack({ id: "tid-2", name: "Second" }),
+    ];
+    const { container } = renderWithProviders({
+      tracks,
+      isLoading: false,
+      isError: false,
+      error: null,
+    });
+    const list = within(container).getByRole("list", { name: "Search results" });
+    const items = within(list).getAllByRole("listitem");
+    const firstPlayButton = within(items[0]).getByRole("button", { name: /play preview/i });
+    const secondPlayButton = within(items[1]).getByRole("button", { name: /play preview/i });
+
+    await user.click(firstPlayButton);
+    expect(within(items[0]).getByRole("button", { name: /pause/i })).toBeInTheDocument();
+    expect(within(items[1]).getByRole("button", { name: /play preview/i })).toBeInTheDocument();
+
+    await user.click(secondPlayButton);
+    expect(within(items[0]).getByRole("button", { name: /play preview/i })).toBeInTheDocument();
+    expect(within(items[1]).getByRole("button", { name: /pause/i })).toBeInTheDocument();
   });
 });
