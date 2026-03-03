@@ -1,6 +1,6 @@
 # Spotify Track Search
 
-A simple Spotify API client to search tracks and play previews. Built with Next.js and TanStack Query. (Recently migrated from a React + Redux + Webpack setup.)
+A simple Spotify API client to search tracks and play previews. Built with Next.js and TanStack Query. (Migrated from an older React + Redux + Webpack setup.)
 
 ## Run locally
 
@@ -9,7 +9,7 @@ yarn install
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Paste your Spotify access token in the app to enable search.
+Open [http://localhost:3000](http://localhost:3000). Paste your Spotify access token (see below) in the app to enable search.
 
 **Note on 30-second previews:** As of late 2024, Spotify restricts preview URLs for apps in development mode (and for apps registered after Nov 2024). When no preview is available, the app plays a **sample audio clip** so you can still try the in-app player; you can also use "Open in Spotify" to play the full track in the Spotify app.
 
