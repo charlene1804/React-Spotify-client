@@ -23,13 +23,15 @@ describe("AudioPlayer", () => {
         set src(v: string) {
           this._src = v;
         }
-      }
+      },
     );
   });
 
   it("renders Play button initially", () => {
     render(<AudioPlayer url="https://example.com/preview.mp3" />);
-    expect(screen.getByRole("button", { name: /play preview/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /play preview/i }),
+    ).toBeInTheDocument();
   });
 
   it("toggles to Pause and calls play on first click", async () => {
@@ -42,16 +44,16 @@ describe("AudioPlayer", () => {
 
   it("cleanup removes ended listener", () => {
     const { unmount } = render(
-      <AudioPlayer url="https://example.com/preview.mp3" />
+      <AudioPlayer url="https://example.com/preview.mp3" />,
     );
     expect(mockAddEventListener).toHaveBeenCalledWith(
       "ended",
-      expect.any(Function)
+      expect.any(Function),
     );
     unmount();
     expect(mockRemoveEventListener).toHaveBeenCalledWith(
       "ended",
-      expect.any(Function)
+      expect.any(Function),
     );
   });
 });

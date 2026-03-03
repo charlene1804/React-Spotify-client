@@ -10,7 +10,12 @@ import ThemeToggle from "@/components/ThemeToggle";
 
 export default function HomeClient() {
   const { accessToken, setAccessToken, searchTerm, setSearchTerm } = useApp();
-  const { data: tracks, isLoading, isError, error } = useQuery({
+  const {
+    data: tracks,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
     queryKey: ["tracks", accessToken, searchTerm],
     queryFn: () => fetchTracks(accessToken, searchTerm),
     enabled: Boolean(accessToken.trim() && searchTerm.trim()),
