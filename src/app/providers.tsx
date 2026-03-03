@@ -1,16 +1,10 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
-const THEME_KEY = "theme";
-
-function getInitialTheme(): "light" | "dark" {
-  if (typeof window === "undefined") return "dark";
-  const stored = localStorage.getItem(THEME_KEY) as "light" | "dark" | null;
-  if (stored === "light" || stored === "dark") return stored;
-  if (typeof window.matchMedia !== "function") return "light";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+function setThemeCookie(value: "light" | "dark") {
+  document.cookie = `theme=${value}; path=/; max-age=31536000; SameSite=Lax`;
 }
 
 type ThemeContextValue = {
@@ -49,21 +43,20 @@ const queryClient = new QueryClient({
   },
 });
 
-export function Providers({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<"light" | "dark">("dark");
-  const [mounted, setMounted] = useState(false);
+type ProvidersProps = {
+  children: React.ReactNode;
+  initialTheme?: "light" | "dark" | null;
+};
 
-  useEffect(() => {
-    setThemeState(getInitialTheme());
-    setMounted(true);
-  }, []);
+export function Providers({ children, initialTheme = null }: ProvidersProps) {
+  const [theme, setThemeState] = useState<"light" | "dark">(
+    () => initialTheme ?? "light"
+  );
 
-  useEffect(() => {
-    if (!mounted) return;
-    localStorage.setItem(THEME_KEY, theme);
-  }, [mounted, theme]);
-
-  const setTheme = (next: "light" | "dark") => setThemeState(next);
+  const setTheme = (next: "light" | "dark") => {
+    setThemeState(next);
+    setThemeCookie(next);
+  };
 
   const [accessToken, setAccessToken] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -75,8 +68,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   };
   const themeValue: ThemeContextValue = { theme, setTheme };
 
-  const showDark =
-    mounted && theme === "dark";
+  const showDark = theme === "dark";
   const wrapperClass = showDark
     ? "dark min-h-screen bg-zinc-900 text-zinc-200"
     : "min-h-screen bg-white text-zinc-900";

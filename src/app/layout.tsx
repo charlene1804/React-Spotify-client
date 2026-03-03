@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { cookies } from "next/headers";
 import "./globals.css";
 import { Providers } from "./providers";
 
@@ -10,15 +11,20 @@ export const metadata: Metadata = {
   description: "Search Spotify tracks with preview playback",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const themeCookie = cookieStore.get("theme")?.value;
+  const initialTheme =
+    themeCookie === "dark" || themeCookie === "light" ? themeCookie : null;
+
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans antialiased min-h-screen`}>
-        <Providers>{children}</Providers>
+        <Providers initialTheme={initialTheme}>{children}</Providers>
       </body>
     </html>
   );
