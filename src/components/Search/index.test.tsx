@@ -87,18 +87,6 @@ describe("Search", () => {
     expect(setSearchTerm).toHaveBeenCalledWith("x");
   });
 
-  it("shows loading message when isLoading is true", () => {
-    render(
-      <Search
-        accessToken="token"
-        searchTerm=""
-        setSearchTerm={vi.fn()}
-        isLoading={true}
-      />,
-    );
-    expect(screen.getByText(/loading/i)).toBeInTheDocument();
-  });
-
   it("sets aria-busy on search input when loading", () => {
     const { container } = render(
       <Search

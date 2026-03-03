@@ -56,11 +56,6 @@ export default function Search({
             className="w-full min-h-[44px] rounded-lg border border-zinc-300 bg-white px-3 py-3 text-base text-zinc-900 placeholder:text-zinc-500 transition-colors duration-300 ease-in-out focus:border-[#1DB954] focus:outline-none focus:ring-1 focus:ring-[#1DB954] dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 sm:py-2 sm:text-sm"
             aria-busy={isLoading}
           />
-          {isLoading && (
-            <p className="text-sm text-zinc-500 dark:text-zinc-500" aria-live="polite">
-              Loading…
-            </p>
-          )}
         </form>
       )}
     </div>
