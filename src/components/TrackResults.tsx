@@ -3,6 +3,7 @@
 import Image from "next/image";
 import type { SpotifyTrack } from "@/lib/spotify";
 import AudioPlayer from "./AudioPlayer";
+import { useTheme } from "@/app/providers";
 
 type TrackResultsProps = {
   tracks: SpotifyTrack[] | undefined;
@@ -17,9 +18,12 @@ export default function TrackResults({
   isError,
   error,
 }: TrackResultsProps) {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   if (isLoading) {
     return (
-      <p className="text-sm text-zinc-400" aria-live="polite">
+      <p className={`text-sm ${isDark ? "text-zinc-400" : "text-zinc-500"}`} aria-live="polite">
         Loading…
       </p>
     );
@@ -27,7 +31,7 @@ export default function TrackResults({
 
   if (isError) {
     return (
-      <p className="text-sm text-red-400" role="alert">
+      <p className={`text-sm ${isDark ? "text-red-400" : "text-red-600"}`} role="alert">
         {error instanceof Error ? error.message : "Search failed"}
       </p>
     );
@@ -35,11 +39,19 @@ export default function TrackResults({
 
   if (!tracks || tracks.length === 0) {
     return (
-      <p className="text-sm text-zinc-400" aria-live="polite">
+      <p className={`text-sm ${isDark ? "text-zinc-400" : "text-zinc-500"}`} aria-live="polite">
         No tracks found.
       </p>
     );
   }
+
+  const cardClass = isDark
+    ? "rounded-xl border border-zinc-600 bg-zinc-800 p-3 shadow-none transition-[border-color,background-color] hover:border-zinc-500 hover:bg-zinc-700 sm:p-4"
+    : "rounded-xl border border-zinc-200 bg-white p-3 shadow-md transition-[border-color,background-color] hover:border-zinc-300 hover:bg-zinc-50 sm:p-4";
+  const imagePlaceholderClass = isDark ? "bg-zinc-700" : "bg-zinc-100";
+  const titleClass = isDark ? "text-zinc-100" : "text-zinc-900";
+  const artistClass = isDark ? "text-zinc-400" : "text-zinc-600";
+  const sampleClass = isDark ? "text-zinc-500" : "text-zinc-500";
 
   return (
     <ul
@@ -47,11 +59,8 @@ export default function TrackResults({
       aria-label="Search results"
     >
       {tracks.map((track) => (
-        <li
-          key={track.id}
-          className="rounded-xl border border-zinc-800 bg-zinc-900/80 p-3 shadow-lg transition-[border-color,background-color] hover:border-zinc-700 hover:bg-zinc-800/80 sm:p-4"
-        >
-          <div className="aspect-square w-full overflow-hidden rounded-lg bg-zinc-800">
+        <li key={track.id} className={cardClass}>
+          <div className={`aspect-square w-full overflow-hidden rounded-lg ${imagePlaceholderClass}`}>
             {track.album.images?.[0]?.url ? (
               <Image
                 src={track.album.images[0].url}
@@ -62,15 +71,15 @@ export default function TrackResults({
                 unoptimized
               />
             ) : (
-              <span className="flex h-full items-center justify-center text-zinc-400 text-xs">
+              <span className={`flex h-full items-center justify-center text-xs ${isDark ? "text-zinc-400" : "text-zinc-500"}`}>
                 No image
               </span>
             )}
           </div>
-          <p className="mt-2 font-medium text-zinc-100 truncate text-sm sm:text-base" title={track.name}>
+          <p className={`mt-2 font-medium truncate text-sm sm:text-base ${titleClass}`} title={track.name}>
             {track.name}
           </p>
-          <p className="text-xs text-zinc-500 truncate sm:text-sm">
+          <p className={`text-xs truncate sm:text-sm ${artistClass}`}>
             {track.artists[0]?.name ?? "—"}
           </p>
           <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -79,7 +88,7 @@ export default function TrackResults({
             ) : (
               <>
                 <AudioPlayer url="/sample.m4a" />
-                <span className="text-xs text-zinc-500">(sample — preview unavailable)</span>
+                <span className={`text-xs ${sampleClass}`}>(sample — preview unavailable)</span>
                 {track.external_urls?.spotify && (
                   <a
                     href={track.external_urls.spotify}

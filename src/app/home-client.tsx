@@ -6,6 +6,7 @@ import { fetchTracks } from "@/lib/spotify";
 import TokenInput from "@/components/TokenInput";
 import Search from "@/components/Search";
 import TrackResults from "@/components/TrackResults";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function HomeClient() {
   const { accessToken, setAccessToken, searchTerm, setSearchTerm } = useApp();
@@ -17,6 +18,9 @@ export default function HomeClient() {
 
   return (
     <main className="min-h-screen px-4 py-5 sm:px-6 sm:py-6 md:max-w-4xl md:mx-auto">
+      <div className="flex justify-end mb-2">
+        <ThemeToggle />
+      </div>
       <div className="space-y-4 sm:space-y-6">
         <TokenInput accessToken={accessToken} setAccessToken={setAccessToken} />
         <Search
@@ -25,7 +29,7 @@ export default function HomeClient() {
           setSearchTerm={setSearchTerm}
           isLoading={isLoading}
         />
-        <p className="text-xs text-zinc-500 sm:text-sm">
+        <p className="text-xs text-zinc-600 sm:text-sm dark:text-zinc-400">
           When Spotify does not provide a preview, the play button uses a sample
           clip so you can still try the audio player.
         </p>
