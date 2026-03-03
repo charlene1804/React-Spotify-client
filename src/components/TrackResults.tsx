@@ -19,7 +19,7 @@ export default function TrackResults({
 }: TrackResultsProps) {
   if (isLoading) {
     return (
-      <p className="text-sm text-zinc-500" aria-live="polite">
+      <p className="text-sm text-zinc-400" aria-live="polite">
         Loading…
       </p>
     );
@@ -27,7 +27,7 @@ export default function TrackResults({
 
   if (isError) {
     return (
-      <p className="text-sm text-red-600" role="alert">
+      <p className="text-sm text-red-400" role="alert">
         {error instanceof Error ? error.message : "Search failed"}
       </p>
     );
@@ -35,7 +35,7 @@ export default function TrackResults({
 
   if (!tracks || tracks.length === 0) {
     return (
-      <p className="text-sm text-zinc-500" aria-live="polite">
+      <p className="text-sm text-zinc-400" aria-live="polite">
         No tracks found.
       </p>
     );
@@ -43,15 +43,15 @@ export default function TrackResults({
 
   return (
     <ul
-      className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+      className="grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
       aria-label="Search results"
     >
       {tracks.map((track) => (
         <li
           key={track.id}
-          className="rounded-lg border border-zinc-200 bg-white p-3 shadow-sm"
+          className="rounded-xl border border-zinc-800 bg-zinc-900/80 p-3 shadow-lg transition-[border-color,background-color] hover:border-zinc-700 hover:bg-zinc-800/80 sm:p-4"
         >
-          <div className="aspect-square w-full overflow-hidden rounded bg-zinc-100">
+          <div className="aspect-square w-full overflow-hidden rounded-lg bg-zinc-800">
             {track.album.images?.[0]?.url ? (
               <Image
                 src={track.album.images[0].url}
@@ -67,30 +67,30 @@ export default function TrackResults({
               </span>
             )}
           </div>
-          <p className="mt-2 font-medium text-zinc-900 truncate" title={track.name}>
+          <p className="mt-2 font-medium text-zinc-100 truncate text-sm sm:text-base" title={track.name}>
             {track.name}
           </p>
-          <p className="text-sm text-zinc-500 truncate">
+          <p className="text-xs text-zinc-500 truncate sm:text-sm">
             {track.artists[0]?.name ?? "—"}
           </p>
-          <div className="mt-2">
+          <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1">
             {track.preview_url ? (
               <AudioPlayer url={track.preview_url} />
             ) : (
-              <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
+              <>
                 <AudioPlayer url="/sample.m4a" />
-                <span className="text-zinc-500">(sample — preview unavailable)</span>
+                <span className="text-xs text-zinc-500">(sample — preview unavailable)</span>
                 {track.external_urls?.spotify && (
                   <a
                     href={track.external_urls.spotify}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-zinc-600 underline hover:text-zinc-900"
+                    className="text-xs text-[#1DB954] underline hover:text-[#1ed760] min-h-[44px] min-w-[44px] inline-flex items-center"
                   >
                     Open in Spotify
                   </a>
                 )}
-              </span>
+              </>
             )}
           </div>
         </li>

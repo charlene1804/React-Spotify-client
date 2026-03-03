@@ -16,9 +16,8 @@ export default function HomeClient() {
   });
 
   return (
-    <main className="min-h-screen p-6">
-      <div className="mx-auto max-w-4xl space-y-6">
-        <h1 className="text-2xl font-semibold">Spotify Track Search</h1>
+    <main className="min-h-screen px-4 py-5 sm:px-6 sm:py-6 md:max-w-4xl md:mx-auto">
+      <div className="space-y-4 sm:space-y-6">
         <TokenInput accessToken={accessToken} setAccessToken={setAccessToken} />
         <Search
           accessToken={accessToken}
@@ -26,7 +25,7 @@ export default function HomeClient() {
           setSearchTerm={setSearchTerm}
           isLoading={isLoading}
         />
-        <p className="text-sm text-zinc-500">
+        <p className="text-xs text-zinc-500 sm:text-sm">
           When Spotify does not provide a preview, the play button uses a sample
           clip so you can still try the audio player.
         </p>

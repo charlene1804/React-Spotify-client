@@ -44,7 +44,7 @@ export default function AudioPlayer({ url }: AudioPlayerProps) {
     <button
       type="button"
       onClick={() => toggle()}
-      className="inline-flex items-center gap-1.5 rounded bg-zinc-800 px-2.5 py-1.5 text-xs font-medium text-white hover:bg-zinc-700"
+      className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-1.5 rounded-lg bg-[#1DB954] px-4 py-2.5 text-sm font-medium text-black transition-colors hover:bg-[#1ed760] active:scale-[0.98]"
       aria-label={playing ? "Pause" : "Play preview"}
     >
       <span aria-hidden>{playing ? "Pause" : "Play"}</span>

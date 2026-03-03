@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
-body {
-  font-family: system-ui, sans-serif;
+:root {
+  --accent: #1DB954;
+  --accent-hover: #1ed760;
+  --card-bg: rgb(39 39 42);
+  --card-hover: rgb(63 63 70);
 }
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+input::placeholder {
+  color: rgb(113 113 122);
+}
+

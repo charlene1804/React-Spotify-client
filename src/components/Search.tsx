@@ -18,21 +18,21 @@ export default function Search({
   return (
     <div className="space-y-4">
       <div className="flex justify-center">
-        <span className="text-2xl font-bold text-[#1DB954]" aria-hidden>
-          Spotify
-        </span>
+        <h1 className="text-xl font-bold text-[#1DB954] sm:text-2xl">
+          Spotify Track Search
+        </h1>
       </div>
       {!hasToken && (
         <div
-          className="flex gap-3 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800"
+          className="flex gap-3 rounded-lg border border-amber-500/40 bg-amber-950/50 p-3 text-sm text-amber-200 sm:p-4"
           role="status"
         >
-          <span aria-hidden className="shrink-0">
+          <span aria-hidden className="shrink-0 text-amber-400">
             ⚠
           </span>
-          <div>
+          <div className="min-w-0">
             <p className="font-medium">Insert an access token</p>
-            <p className="mt-0.5 text-amber-700">
+            <p className="mt-0.5 text-amber-200/90">
               To use search, paste your Spotify access token in the field above.
               See README for how to get one.
             </p>
@@ -44,7 +44,7 @@ export default function Search({
           onSubmit={(e) => e.preventDefault()}
           className="flex flex-col gap-2"
         >
-          <label htmlFor="search" className="block text-sm font-medium">
+          <label htmlFor="search" className="block text-sm font-medium text-zinc-300">
             Search for a track
           </label>
           <input
@@ -53,7 +53,7 @@ export default function Search({
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search for a track"
-            className="w-full rounded border border-zinc-300 px-3 py-2 text-sm"
+            className="w-full min-h-[44px] rounded-lg border border-zinc-600 bg-zinc-900 px-3 py-3 text-base text-zinc-100 placeholder:text-zinc-500 focus:border-[#1DB954] focus:outline-none focus:ring-1 focus:ring-[#1DB954] sm:py-2 sm:text-sm"
             aria-busy={isLoading}
           />
           {isLoading && (
